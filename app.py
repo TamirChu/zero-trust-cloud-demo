@@ -5,7 +5,7 @@ from authlib.integrations.flask_client import OAuth
 app = Flask(__name__)
 
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
-
+print("FLASK_SECRET_KEY configured:", bool(app.secret_key))
 oauth = OAuth(app)
 
 keycloak = oauth.register(
