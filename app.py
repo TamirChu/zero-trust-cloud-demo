@@ -41,6 +41,7 @@ def home():
 
 @app.route("/login")
 def login():
+    print("LOGIN secret configured:", bool(app.secret_key))
     redirect_uri = url_for("callback", _external=True)
     return keycloak.authorize_redirect(redirect_uri)
 
