@@ -4,9 +4,7 @@ from authlib.integrations.flask_client import OAuth
 
 app = Flask(__name__)
 
-app.secret_key = os.environ.get("FLASK_SECRET_KEY")
-print("FLASK_SECRET_KEY configured:", bool(app.secret_key))
-oauth = OAuth(app)
+app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY")
 
 keycloak = oauth.register(
     name="keycloak",
@@ -41,7 +39,6 @@ def home():
 
 @app.route("/login")
 def login():
-    print("LOGIN secret configured:", bool(app.secret_key))
     redirect_uri = url_for("callback", _external=True)
     return keycloak.authorize_redirect(redirect_uri)
 
